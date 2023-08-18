@@ -1,5 +1,6 @@
 ---
 title: "Testing Functions"
+date: "18 August 2023"
 format: html
 editor: visual
 ---
@@ -40,7 +41,7 @@ expect_length(mean_range(mtcars), 2)
 -   nothing returned, so the function is working as expected
 
 ```{r}
-expect_type(mean_range(mtcars), "character")
+#expect_type(mean_range(mtcars), "character")
 ```
 
 -   it's expecting to return a numeric value and not a character
@@ -50,3 +51,22 @@ expect_true(mean_range(mtcars)[1] <= mean_range(mtcars)[2])
 ```
 
 -   we expect the minimum value returned to be less than or equal to the maximum value returned
+
+## Sourcing functions in .R scripts
+
+```{r}
+source(here::here("src", "name_cart.R"))
+```
+
+```{r}
+name_cart(food = "sushi", animal = "sparrow")
+```
+
+```{r}
+source(here::here("src", "cork_oak_growth.R"))
+```
+
+```{r}
+height_t2(height_t1 = 20, t1 = 4, t2 = 20)
+```
+
