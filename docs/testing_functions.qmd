@@ -1,0 +1,52 @@
+---
+title: "Testing Functions"
+format: html
+editor: visual
+---
+
+```{r}
+library(testthat)
+library(devtools)
+library(remotes)
+```
+
+## Making a function
+
+Given data frame with numeric column, calc means across columns and return the max and min mean values
+
+```{r}
+mean_range <- function(df) {
+  col_means <- apply(X = df, MARGIN = 2, FUN = mean, na.rm = TRUE)
+  col_mean_max <- max(col_means)
+  col_mean_min <- min(col_means)
+  return(c(col_mean_min, col_mean_max))
+}
+```
+
+```{r}
+mean_range(mtcars)
+
+mean_range(faithful)
+```
+
+This function should always return two numeric values in a matrix.
+
+## Unit-testing the function
+
+```{r}
+expect_length(mean_range(mtcars), 2)
+```
+
+-   nothing returned, so the function is working as expected
+
+```{r}
+expect_type(mean_range(mtcars), "character")
+```
+
+-   it's expecting to return a numeric value and not a character
+
+```{r}
+expect_true(mean_range(mtcars)[1] <= mean_range(mtcars)[2])
+```
+
+-   we expect the minimum value returned to be less than or equal to the maximum value returned
